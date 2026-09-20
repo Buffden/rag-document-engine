@@ -43,7 +43,7 @@ jobs:
         run: |
           CHANGED=$(git diff --name-only ${{ github.event.pull_request.base.sha }} HEAD | grep -E '\.(puml|plantuml)$' || true)
           if [ -n "$CHANGED" ]; then
-            diagram-sync --files $CHANGED
+            diagram-sync --files $CHANGED --config diagram-sync.config.json
           else
             echo "No diagram files changed."
           fi
@@ -83,11 +83,11 @@ jobs:
       - name: Generate changed diagrams
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            diagram-sync
+            diagram-sync --config diagram-sync.config.json
           else
             CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.(puml|plantuml)$')
             if [ -n "$CHANGED" ]; then
-              diagram-sync --files $CHANGED
+              diagram-sync --files $CHANGED --config diagram-sync.config.json
             else
               echo "No diagram files changed."
             fi

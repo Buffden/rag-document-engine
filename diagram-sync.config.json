@@ -1,0 +1,11 @@
+{
+  "format": "svg",
+  "jobs": [
+    {
+      "name": "blueprints",
+      "type": "plantuml",
+      "format": "svg",
+      "background": "#FFFFFF"
+    }
+  ]
+}
